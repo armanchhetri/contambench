@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contambench.local/schemas/contamination_export.schema.json",
+  "title": "ContamBench GuideLLM-ready contamination export CSV row",
+  "type": "object",
+  "required": ["prompt_id", "prompt", "success_rate", "is_attack", "benign_prompt", "row_index"],
+  "properties": {
+    "prompt_id": { "type": "string", "description": "Stable id of the benign instruction" },
+    "prompt": {
+      "type": "string",
+      "description": "Text submitted to the endpoint (benign or adversarial)"
+    },
+    "success_rate": { "type": "number", "description": "Stage-A adequacy of the paired stressor" },
+    "is_attack": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "1 if prompt is adversarial; GuideLLM ignores this column"
+    },
+    "benign_prompt": { "type": "string", "description": "Original benign text for label join" },
+    "row_index": { "type": "integer", "minimum": 0 }
+  }
+}

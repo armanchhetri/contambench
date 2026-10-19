@@ -1,0 +1,19 @@
+# Control run: a plain-language "keep writing" suffix in place of the optimized one.
+# Swap the file for random_suffix.json or long_output_instruction.json for the other controls.
+#   contam-bench run --config examples/control_semantic_suffix.yaml --endpoint http://HOST:8000
+name: control_semantic_suffix
+backend: openai
+attack_model: meta-llama/Llama-3.2-3B-Instruct
+attack_file: contambench:d1_stressors/controls/semantic_suffix.json
+contamination_ratio: [0.0, 0.02, 0.05, 0.10, 0.15]
+num_clients: 50
+arrival_rate: [0.27]
+arrival_model: poisson
+requests_per_client: 20
+num_trials: 3
+max_tokens: 4096
+temperature: 0.7
+timeout_s: 600
+config_cooldown_s: 20
+auto_slo: true
+seed: 23

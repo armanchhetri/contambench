@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contambench.local/schemas/stressor_pair.schema.json",
+  "title": "ContamBench stressor pair (entry in summary.json prompts[])",
+  "type": "object",
+  "required": ["prompt", "adv_suffix", "adv_prompt", "success_rate"],
+  "properties": {
+    "prompt": { "type": "string", "description": "Benign instruction text" },
+    "adv_suffix": { "type": "string", "description": "Output-saturation suffix tokens as text" },
+    "adv_prompt": { "type": "string", "description": "Full adversarial prompt (benign + suffix)" },
+    "success_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Stage-A adequacy score (fraction of runs reaching length criterion)"
+    },
+    "avg_len": { "type": "number", "description": "Mean adversarial output length (tokens)" },
+    "repet": { "type": "number", "description": "Repetition statistic from Stage-A evaluation" },
+    "answer": { "type": "string", "description": "Optional sample decode (may be large)" }
+  }
+}

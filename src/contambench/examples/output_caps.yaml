@@ -1,0 +1,19 @@
+# Output-cap run: the same contaminated workload under several output caps.
+# Include 0.0 in contamination_ratio if you want SLO budgets from the same run.
+#   contam-bench run --config examples/output_caps.yaml --endpoint http://HOST:8000
+name: output_caps
+backend: openai
+attack_model: meta-llama/Llama-3.2-3B-Instruct
+workload_size: 50
+contamination_ratio: [0.0, 0.10]
+num_clients: 50
+arrival_rate: [0.23]
+arrival_model: poisson
+requests_per_client: 20
+num_trials: 3
+max_tokens: [512, 1024, 2048, 4096]
+temperature: 0.7
+timeout_s: 600
+config_cooldown_s: 20
+auto_slo: true
+seed: 23

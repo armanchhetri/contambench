@@ -1,0 +1,72 @@
+[
+ {
+  "pair_index": 0,
+  "prompt": "benign prompt 0",
+  "adv_prompt": "benign prompt 0 SUFFIX",
+  "success_rate": 1.0,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 1,
+  "prompt": "benign prompt 1",
+  "adv_prompt": "benign prompt 1 SUFFIX",
+  "success_rate": 0.9,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 2,
+  "prompt": "benign prompt 2",
+  "adv_prompt": "benign prompt 2 SUFFIX",
+  "success_rate": 0.8,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 3,
+  "prompt": "benign prompt 3",
+  "adv_prompt": "benign prompt 3 SUFFIX",
+  "success_rate": 0.7,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 4,
+  "prompt": "benign prompt 4",
+  "adv_prompt": "benign prompt 4 SUFFIX",
+  "success_rate": 0.6,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 5,
+  "prompt": "benign prompt 5",
+  "adv_prompt": "benign prompt 5 SUFFIX",
+  "success_rate": 0.5,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 6,
+  "prompt": "benign prompt 6",
+  "adv_prompt": "benign prompt 6 SUFFIX",
+  "success_rate": 0.4,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 7,
+  "prompt": "benign prompt 7",
+  "adv_prompt": "benign prompt 7 SUFFIX",
+  "success_rate": 0.3,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 8,
+  "prompt": "benign prompt 8",
+  "adv_prompt": "benign prompt 8 SUFFIX",
+  "success_rate": 0.2,
+  "avg_len": 100.0
+ },
+ {
+  "pair_index": 9,
+  "prompt": "benign prompt 9",
+  "adv_prompt": "benign prompt 9 SUFFIX",
+  "success_rate": 0.1,
+  "avg_len": 100.0
+ }
+]

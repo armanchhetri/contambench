@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contambench.local/schemas/contamination_manifest.schema.json",
+  "title": "Manifest written alongside a contaminated export CSV",
+  "type": "object",
+  "required": [
+    "contamination_ratio",
+    "n_rows",
+    "n_attack",
+    "n_benign",
+    "seed",
+    "workload_size",
+    "selection"
+  ],
+  "properties": {
+    "benign_tiled": { "type": "string" },
+    "attack_summary": { "type": "string" },
+    "out_csv": { "type": "string" },
+    "n_rows": { "type": "integer" },
+    "contamination_ratio": { "type": "number" },
+    "n_attack": { "type": "integer" },
+    "n_benign": { "type": "integer" },
+    "workload_size": { "type": "integer" },
+    "eligible_unique_prompts": { "type": "integer" },
+    "eligible_rows": { "type": "integer" },
+    "seed": { "type": "integer" },
+    "selection": { "type": "string" },
+    "attack_row_indices": { "type": "array", "items": { "type": "integer" } },
+    "attack_prompt_ids": { "type": "array", "items": { "type": "string" } },
+    "text_column": { "type": "string" },
+    "guide_llm_note": { "type": "string" }
+  }
+}

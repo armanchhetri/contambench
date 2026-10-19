@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "contambench"
+version = "0.1.0"
+description = "Stressor suites, labeled contaminated workloads, and reference measurements for testing LLM serving"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Arman Chhetri", email = "ac7240@rit.edu" },
+    { name = "Yinxi Liu", email = "yxlics@rit.edu" },
+]
+keywords = ["llm", "serving", "vllm", "stress testing", "benchmark", "dataset"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Benchmark",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "pyarrow>=14",
+    "scipy>=1.10",
+    "pyyaml>=6",
+    "requests>=2.31",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+guidellm = ["guidellm==0.7.1"]
+test = ["pytest>=8", "jsonschema>=4"]
+
+[project.scripts]
+contam-bench = "contambench.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/armanchhetri/contambench"
+Source = "https://github.com/armanchhetri/contambench"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/contambench"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/contambench", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
