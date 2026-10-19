@@ -113,3 +113,25 @@ def test_calibrate_from_config(tmp_path, monkeypatch):
     assert cli.main(["calibrate", "--config", str(cfg), "--simulate", "--results-dir", str(tmp_path / "res")]) == 0
     out = next((tmp_path / "res" / "raw").glob("*/calibrate-capacity/capacity_calibration.json"))
     assert json.loads(out.read_text())["capacity_throughput_req_s"] > 0
+
+
+def test_import_guidellm_report(tmp_path):
+    """A report written by stock GuideLLM 0.7.1 (mock server) imports and scores."""
+    out = tmp_path / "gl"
+    cli.main(["import-guidellm", str(FIX / "guidellm_mock.json"), "--labels", str(FIX / "guidellm_workload.csv"),
+              "--max-tokens", "64", "--out", str(out)])
+    df = score.load(out)
+    assert len(df) == 8 and df.success.all()
+    assert (df.prompt_type == "attack").sum() == 1 and (df.prompt_type == "unlabeled").sum() == 0
+    assert df.contamination_ratio.iloc[0] == 0.1 and df.arrival_rate.iloc[0] == 20
+    assert set(score.METRICS) <= set(df.columns) and df.latency_ms.notna().all()
+
+
+@needs_data
+def test_guidellm_case_reproduces_from_raw_report():
+    from contambench import report
+
+    g = report.table_guidellm()
+    assert g["guidellm_c0p10"]["n_stressor"] == 99 and g["guidellm_c0p10"]["unlabeled"] == 0
+    assert round(100 * g["guidellm_c0p10"]["stressor_slo_violation"], 1) == 78.8
+    assert round(100 * g["guidellm_c0p10"]["benign_slo_violation"], 1) == 65.1

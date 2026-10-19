@@ -13,7 +13,8 @@ prompt pools do not exercise this case.
 The package fetches and verifies the record, writes labeled workloads at a chosen `c`,
 runs YAML-configured campaigns against an endpoint you operate, and scores any run with
 the SLO oracle used for the published results. It does not introduce a new
-load-generation technique; it drives the bundled open-loop harness or GuideLLM.
+load-generation technique. Its workloads also run unchanged on existing load generators;
+section 5 shows this for [GuideLLM](https://github.com/vllm-project/guidellm).
 
 - Data record: Zenodo, [doi:10.5281/zenodo.23482023](https://doi.org/10.5281/zenodo.23482023)
 - Project page: to be added on publication
@@ -23,7 +24,6 @@ load-generation technique; it drives the bundled open-loop harness or GuideLLM.
 
 ```bash
 pip install contambench                 # Python 3.10+, CPU only, no torch
-pip install "contambench[guidellm]"     # adds GuideLLM 0.7.1
 ```
 
 ## 1. Get the data
@@ -115,22 +115,43 @@ Command-line options such as `--endpoint` override the file.
 Each run writes `contambench-results/raw/<run_id>/` with `requests.parquet`,
 `requests.csv`, and `metadata.json`, in the same format as the record's D3 runs.
 
-## 5. Reuse a workload in GuideLLM
+## 5. Use the workloads with GuideLLM
 
-An exported CSV is a GuideLLM dataset file. Hold the client fixed, run once with the
-benign pool and once with the contaminated export, and score both against the same
-budgets:
+[GuideLLM](https://github.com/vllm-project/guidellm) is the vLLM project's load and
+SLO benchmarking tool (Apache-2.0). contambench does not include or wrap it: install it
+separately and run it as published, with a ContamBench export as its dataset file. Then
+convert its report with `import-guidellm` and score it like any other run.
 
 ```bash
+pip install guidellm==0.7.1             # separate environment recommended; it pulls in torch
+
+contam-bench export --suite llama-3.2-3b-instruct --c 0    --out benign.csv
 contam-bench export --suite llama-3.2-3b-instruct --c 0.10 --out workload.csv
-contam-bench guidellm -- run \
-  --backend '{"kind": "openai_http", "target": "http://HOST:8000", "stream": true,
-              "extras": {"body": {"temperature": 0.7, "max_tokens": 4096}}}' \
-  --profile kind=poisson,rate=13.5 --constraint kind=max_requests,count=1000 \
-  --data '{"kind": "csv_file", "path": "workload.csv"}' \
-  --data-column-mapper '{"kind": "generative_column_mapper", "column_mappings": {"text_column": "prompt"}}' \
-  --output kind=json,path=guidellm_c0p10.json
+
+for w in benign workload; do
+  guidellm run \
+    --backend '{"kind": "openai_http", "target": "http://HOST:8000", "request_format": "/v1/chat/completions",
+                "stream": true, "extras": {"body": {"temperature": 0.7, "max_tokens": 4096}}}' \
+    --profile kind=poisson,rate=13.5 --constraint kind=max_requests,count=1000 \
+    --data "{\"kind\": \"csv_file\", \"path\": \"$w.csv\", \"load_kwargs\": {\"split\": \"train\"}}" \
+    --data-column-mapper '{"kind": "generative_column_mapper", "column_mappings": {"text_column": "prompt"}}' \
+    --output kind=json,path=guidellm_$w.json
+  contam-bench import-guidellm guidellm_$w.json --labels $w.csv --max-tokens 4096 --out runs/guidellm_$w
+done
+
+contam-bench score runs/guidellm_benign runs/guidellm_workload              # budgets from the benign run
+contam-bench score runs/guidellm_workload --budgets other_run/slo_budgets.json --budget-rate 0.27
 ```
+
+`import-guidellm` labels each request by matching its prompt with the export, so
+stressor and benign requests can be scored separately. GuideLLM does not report a
+finish reason; the importer counts a request as reaching the cap when its output length
+equals `--max-tokens`. Score each report at one rate: run GuideLLM once per rate.
+
+The GuideLLM runs in the data record were made with GuideLLM at upstream commit
+`90bc9de` (July 2026, after release 0.7.1). To use exactly that code:
+`pip install "guidellm @ git+https://github.com/vllm-project/guidellm@90bc9de035cdc8c6a125e8b9f40bab3225f511ec"`.
+The commands above were checked with the released 0.7.1.
 
 ## The oracle
 
@@ -151,6 +172,15 @@ Stage-B records from a contamination sweep on the target deployment.
 pip install -e ".[test]"
 pytest                                   # CPU tests; set CONTAMBENCH_DATA to also run the data checks
 ```
+
+## Acknowledgments
+
+The GuideLLM comparison and the `import-guidellm` reader build on
+[GuideLLM](https://github.com/vllm-project/guidellm) by the vLLM project, used
+unmodified under the Apache License 2.0; contambench supplies labeled workloads that it
+can run. The serving targets were run with
+[vLLM](https://github.com/vllm-project/vllm), and the stressors were generated with
+[LoopLLM](https://arxiv.org/abs/2511.07876).
 
 ## License
 

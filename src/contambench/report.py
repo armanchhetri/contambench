@@ -47,19 +47,43 @@ def table_sweep(base: Path | None = None) -> list[dict]:
 
 
 def table_guidellm(base: Path | None = None) -> dict:
-    """GuideLLM runs scored against the Llama-3.2-3B campaign budgets at lambda = 0.27."""
-    import pandas as pd
+    """The two GuideLLM runs, imported from their benchmarks.json and scored against the
+    Llama-3.2-3B campaign budgets at lambda = 0.27 (the same import any user runs)."""
+    from contambench import guidellm_import
 
-    d3 = data.require("d3", base)
-    runs = json.loads((d3 / "guidellm" / "c0p10" / "analysis" / "head2head_threeway.json").read_text())["runs"]
+    d2, d3 = data.require("d2", base), data.require("d3", base)
+    exports = d2 / "exports" / "llama-3.2-3b-instruct"
     sweep = score.load(d3 / "runs" / "aws_llama3b" / "rq2_sweep")
     b = score.budgets(sweep[np.isclose(sweep.arrival_rate, 0.27)])
-    for label, key in (("benign", "guidellm_benign"), ("c0p10", "guidellm_c0p10")):
-        df = pd.read_csv(d3 / "guidellm" / label / "analysis" / "per_request.csv")
-        ok = df[df.success.astype(bool)]
-        runs[key]["slo_violation_rate"] = float(score.violates(ok, b).mean())
-        runs[key]["n_completed"] = int(len(ok))
-    return runs
+    out = {}
+    for key, label, csv_name, c in (("guidellm_benign", "benign", "benign_tiled1000.csv", 0.0),
+                                    ("guidellm_c0p10", "c0p10", "c0p10_tiled1000.csv", 0.10)):
+        df, info = guidellm_import.to_frame(d3 / "guidellm" / label / "benchmarks.json", exports / csv_name,
+                                            max_tokens=4096, contamination_ratio=c)
+        ok = df[df.success]
+        adv, ben = ok[ok.prompt_type == "attack"], ok[ok.prompt_type == "benign"]
+        out[key] = {
+            "p95_latency_ms": float(np.percentile(ok.latency_ms, 95)),
+            "p95_ttft_ms": float(np.percentile(ok.ttft_ms.dropna(), 95)),
+            "p95_tbt_ms": float(np.percentile(ok.tbt_ms.dropna(), 95)),
+            "slo_violation_rate": float(score.violates(ok, b).mean()),
+            "n_completed": int(len(ok)),
+            "n_stressor": int(len(adv)),
+            "unlabeled": info["unlabeled_requests"],
+            "stressor_slo_violation": float(score.violates(adv, b).mean()) if len(adv) else None,
+            "benign_slo_violation": float(score.violates(ben, b).mean()) if len(ben) else None,
+            "stressor_p95_latency_ms": float(np.percentile(adv.latency_ms, 95)) if len(adv) else None,
+            "benign_p95_latency_ms": float(np.percentile(ben.latency_ms, 95)) if len(ben) else None,
+        }
+    for key in ("ours_c0", "ours_c0p10"):
+        c = 0.0 if key == "ours_c0" else 0.10
+        r = next(x for x in score.sweep(sweep, 0.27)["rows"] if abs(x["c"] - c) < 1e-9)
+        out[key] = {"slo_violation_rate": r["slo_violation"], "p95_latency_ms": r["p95_latency_s"] * 1000}
+    th = json.loads((d3 / "guidellm" / "c0p10" / "analysis" / "head2head_threeway.json").read_text())["runs"]
+    for key in ("ours_c0", "ours_c0p10"):
+        out[key]["p95_ttft_ms"] = th[key]["ttft_p95_ms"]
+        out[key]["p95_tbt_ms"] = th[key]["tbt_p95_ms"]
+    return out
 
 
 def check_against_paper(sweeps: list[dict], base: Path | None = None) -> list[str]:

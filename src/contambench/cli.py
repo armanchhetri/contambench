@@ -100,7 +100,8 @@ def cmd_score(args) -> int:
 
     df = score.load(args.run)
     rates = [args.arrival_rate] if args.arrival_rate is not None else sorted(df.arrival_rate.unique())
-    results = [score.sweep(df, r) for r in rates]
+    budget = score.load_budgets(args.budgets, args.budget_rate) if args.budgets else None
+    results = [score.sweep(df, r, budget) for r in rates]
     if args.json:
         print(json.dumps({"sweeps": results, "stage_b": score.stage_b(df)}, indent=2))
     else:
@@ -143,15 +144,19 @@ def cmd_telemetry(args, extra: list[str]) -> int:
     return telemetry.main(extra)
 
 
-def cmd_guidellm(args, extra: list[str]) -> int:
-    import shutil
-    import subprocess
+def cmd_import_guidellm(args) -> int:
+    from contambench import guidellm_import
 
-    exe = shutil.which("guidellm")
-    if not exe:
-        print("GuideLLM is not installed: pip install 'contambench[guidellm]'", file=sys.stderr)
-        return 2
-    return subprocess.call([exe, *extra])
+    df, info = guidellm_import.to_frame(Path(args.benchmarks), Path(args.labels), max_tokens=args.max_tokens,
+                                        contamination_ratio=args.c, arrival_rate=args.arrival_rate,
+                                        trial=args.trial, model=args.model)
+    out = guidellm_import.write(df, info, Path(args.out))
+    print(f"wrote {out}/requests.parquet: {info['requests']} requests, {info['successful']} successful, "
+          f"{info['stressor_requests']} stressors, {info['unlabeled_requests']} unlabeled, "
+          f"c = {info['contamination_ratio']:g}, rate = {info['arrival_rate']:g}")
+    if info["unlabeled_requests"]:
+        print("warning: some prompts did not match the export; pass the same CSV that GuideLLM ran", file=sys.stderr)
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -194,7 +199,9 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--simulate", action="store_true", help="synthetic latencies, no endpoint")
 
     s = sub.add_parser("score", help="apply the SLO oracle and label split to a D3-format run")
-    s.add_argument("run", help="run directory or requests.parquet/csv")
+    s.add_argument("run", nargs="+", help="run directories or requests.parquet/csv files; several are pooled")
+    s.add_argument("--budgets", help="take SLO budgets from a slo_budgets.json file or another run's c = 0 requests")
+    s.add_argument("--budget-rate", type=float, help="arrival rate whose budgets to use from --budgets")
     s.add_argument("--arrival-rate", type=float)
     s.add_argument("--json", action="store_true")
 
@@ -207,7 +214,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("telemetry", help="poll a vLLM /metrics endpoint into a JSONL log (see telemetry --help)",
                    add_help=False)
-    sub.add_parser("guidellm", help="run GuideLLM (pass its arguments after --)", add_help=False)
+    g = sub.add_parser("import-guidellm", help="convert a GuideLLM benchmarks.json into a D3-format run")
+    g.add_argument("benchmarks", help="benchmarks.json written by `guidellm run`")
+    g.add_argument("--labels", required=True, help="the exported workload CSV that GuideLLM ran")
+    g.add_argument("--out", required=True, help="output run directory")
+    g.add_argument("--max-tokens", type=int, default=4096, help="output cap used in the run (for the cap-hit rule)")
+    g.add_argument("--c", type=float, help="contamination ratio (default: from the export manifest)")
+    g.add_argument("--arrival-rate", type=float, help="rate label (default: GuideLLM's aggregate rate)")
+    g.add_argument("--trial", type=int, default=0)
+    g.add_argument("--model")
     return p
 
 
@@ -228,8 +243,8 @@ def _command_index(argv: list[str]) -> int | None:
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     i = _command_index(argv)
-    # `run`, `telemetry`, and `guidellm` forward everything after the subcommand.
-    passthrough = {"run": cmd_run, "guidellm": cmd_guidellm, "telemetry": cmd_telemetry}
+    # `run` and `telemetry` forward everything after the subcommand.
+    passthrough = {"run": cmd_run, "telemetry": cmd_telemetry}
     if i is not None and argv[i] in passthrough:
         args = build_parser().parse_args(argv[: i + 1])
         extra = argv[i + 1:]
@@ -238,7 +253,7 @@ def main(argv: list[str] | None = None) -> int:
         return passthrough[argv[i]](args, extra)
     args = build_parser().parse_args(argv)
     return {"data": cmd_data, "export": cmd_export, "calibrate": cmd_calibrate, "score": cmd_score,
-            "report": cmd_report, "examples": cmd_examples}[args.cmd](args)
+            "report": cmd_report, "examples": cmd_examples, "import-guidellm": cmd_import_guidellm}[args.cmd](args)
 
 
 if __name__ == "__main__":

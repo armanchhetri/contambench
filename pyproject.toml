@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "contambench"
-version = "0.1.0"
+version = "0.1.1"
 description = "Stressor suites, labeled contaminated workloads, and reference measurements for testing LLM serving"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -34,7 +34,6 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-guidellm = ["guidellm==0.7.1"]
 test = ["pytest>=8", "jsonschema>=4"]
 
 [project.scripts]
