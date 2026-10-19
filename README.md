@@ -17,7 +17,7 @@ load-generation technique. Its workloads also run unchanged on existing load gen
 section 5 shows this for [GuideLLM](https://github.com/vllm-project/guidellm).
 
 - Data record: Zenodo, [doi:10.5281/zenodo.23482023](https://doi.org/10.5281/zenodo.23482023)
-- Project page: to be added on publication
+- Project page: [contambench.pages.dev](https://contambench.pages.dev)
 - Paper: *ContamBench: Stressor Suites and Contaminated Workload Traces for Testing LLM Serving*, ICSE 2027 Tool Demonstrations and Data Showcase (under review)
 
 ## Install

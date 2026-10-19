@@ -40,7 +40,8 @@ test = ["pytest>=8", "jsonschema>=4"]
 contam-bench = "contambench.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/armanchhetri/contambench"
+Homepage = "https://contambench.pages.dev"
+Dataset = "https://doi.org/10.5281/zenodo.23482023"
 Source = "https://github.com/armanchhetri/contambench"
 
 [tool.hatch.build.targets.wheel]
