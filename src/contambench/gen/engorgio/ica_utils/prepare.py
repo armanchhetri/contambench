@@ -1,6 +1,6 @@
 # Engorgio (Dong et al., ICLR 2025, "An Engorgio Prompt Makes Large Language Model Babble on").
 # Adapted, with credit, from the authors' repository https://github.com/jianshuod/Engorgio-prompt
-# (commit 5fb50dd) and modified by the ContamBench authors; see THIRD_PARTY_NOTICES.md.
+# (commit 5fb50dd); see THIRD_PARTY_NOTICES.md.
 import numpy as np
 from contambench.gen.models import Model
 

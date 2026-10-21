@@ -29,8 +29,8 @@ contains code adapted from the projects below.
 - Code: `src/contambench/gen/engorgio/` (attack loop, `ica_utils/loss.py`,
   `ica_utils/prepare.py`, `ica_utils/ctl.py`). The Engorgio implementation is adapted,
   with credit, from the authors' repository <https://github.com/jianshuod/Engorgio-prompt>
-  (commit `5fb50dd`, August 2025), and substantially modified.
-- Changes: soft-prompt optimization driven through contambench's `Model` wrapper and the
+  (commit `5fb50dd`, August 2025).
+- Integration in contambench: soft-prompt optimization driven through contambench's `Model` wrapper and the
   model's chat template; multiple end-of-sequence ids; an optional second loss version;
   CPU offloading of activations above a GPU-memory threshold; the trigger tokens kept
   with each candidate so D1 pairs can be built; a clear error for tokenizers that do not
