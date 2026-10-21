@@ -91,9 +91,9 @@ contam-bench run --config examples/sweep.yaml --endpoint http://HOST:8000
 contam-bench score contambench-results/raw/<run_id>
 ```
 
-Report the Stage-B line of `score` together with any result. A suite that saturates in
-isolation can still fail to reach the cap on your deployment; the Mistral-7B suite in
-the record is an example.
+Report the Stage-B line of `score` together with any result. A suite generated for a model can
+still fail to reach the cap on your deployment; the Mistral-7B suite in the record is an
+example. Its Stage-A run used greedy decoding, so `report` prints no Stage-A rate for it.
 
 ### Example configurations (`contam-bench examples` copies them to `./examples`)
 

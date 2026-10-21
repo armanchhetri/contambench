@@ -17,6 +17,11 @@ HIGH_POINT = [
 ]
 
 
+# Suites whose Stage-A run used greedy decoding (no sampling in the model's default
+# generation config), so their 16 Stage-A samples are identical; no Stage-A rate is reported.
+GREEDY_STAGE_A = {"mistral-7b-instruct-v0.3"}
+
+
 def table_suites(base: Path | None = None, top_k: int = 50) -> list[dict]:
     d1 = data.require("d1", base)
     rows = []
@@ -30,7 +35,8 @@ def table_suites(base: Path | None = None, top_k: int = 50) -> list[dict]:
         sbj = json.loads(sb.read_text()) if sb.exists() else {}
         rows.append({
             "target": suite["model"], "pairs": len(pairs), "L_max": suite["stage_a"]["generation_cap_tokens"],
-            "stage_a_top50": float(sr[top].mean()), "stage_a_top50_mean_len": float(ln[top].mean()),
+            "stage_a_top50": None if slug in GREEDY_STAGE_A else float(sr[top].mean()),
+            "stage_a_top50_mean_len": None if slug in GREEDY_STAGE_A else float(ln[top].mean()),
             "stage_b": sbj.get("stressor_cap_hit"), "stressor_mean_out": sbj.get("stressor_mean_out"),
             "benign_mean_out": sbj.get("benign_mean_out"),
         })
@@ -105,7 +111,7 @@ def render(base: Path | None = None, check: bool = True) -> str:
         sb = "-" if r["stage_b"] is None else f"{r['stage_b']:.2f}"
         so = "-" if r["stressor_mean_out"] is None else f"{r['stressor_mean_out']:.0f}"
         bo = "-" if r["benign_mean_out"] is None else f"{r['benign_mean_out']:.0f}"
-        lines.append(f"{r['target']:42} {r['pairs']:>5} {r['L_max']:>6} {r['stage_a_top50']:>7.2f} {sb:>7} {so:>10} {bo:>10}")
+        lines.append(f"{r['target']:42} {r['pairs']:>5} {r['L_max']:>6} {'---' if r['stage_a_top50'] is None else format(r['stage_a_top50'], '.2f'):>7} {sb:>7} {so:>10} {bo:>10}")
     sweeps = table_sweep(base)
     lines += ["", "Table III. Contamination sweep at the high operating point (D3)"]
     for s in sweeps:
