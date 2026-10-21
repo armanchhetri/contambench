@@ -1,0 +1,44 @@
+{
+ "-1": {
+  "prompt": "benign prompt 0 * * *",
+  "answer": "short",
+  "total_len": 5,
+  "repet": 0.9
+ },
+ "0": {
+  "prompt": "benign prompt 0",
+  "adv_suffix": " sfx0 # * % & @",
+  "adv_prompt": "benign prompt 0 sfx0 # * % & @",
+  "current_losses": 0.5,
+  "loss_config": "cycle",
+  "answer": "# * % # * % # * % ",
+  "success_rate": 0.25,
+  "avg_len": 100.0,
+  "repet": 0.1,
+  "time": 1.0
+ },
+ "1": {
+  "prompt": "benign prompt 0",
+  "adv_suffix": " sfx1 # * % & @",
+  "adv_prompt": "benign prompt 0 sfx1 # * % & @",
+  "current_losses": 0.5,
+  "loss_config": "cycle",
+  "answer": "# * % # * % # * % ",
+  "success_rate": 0.75,
+  "avg_len": 400.0,
+  "repet": 0.1,
+  "time": 1.0
+ },
+ "2": {
+  "prompt": "benign prompt 0",
+  "adv_suffix": " sfx2 # * % & @",
+  "adv_prompt": "benign prompt 0 sfx2 # * % & @",
+  "current_losses": 0.5,
+  "loss_config": "cycle",
+  "answer": "# * % # * % # * % ",
+  "success_rate": 0.5,
+  "avg_len": 300.0,
+  "repet": 0.1,
+  "time": 1.0
+ }
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "name": "StabilityAI/stablelm-tuned-alpha-3b",
+    "sys_prompt": {
+      "sys_prompt": "<|SYSTEM|># StableLM Tuned (Alpha version) \n- StableLM is a helpful and harmless open-source AI language model developed by StabilityAI.\n- StableLM is excited to be able to help the user, but will refuse to do anything that could be considered harmful to the user.\n- StableLM is more than just an information source, StableLM is also able to write poetry, short stories, and make jokes.\n- StableLM will refuse to participate in anything that could harm a human.",
+      "roles": [
+        "<|ASSISTANT|> ",
+        "<|USER|> "
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": [
+      50278,
+      50279,
+      50277,
+      1,
+      0
+    ]
+  },
+  {
+    "name": "lmsys/vicuna-7b-v1.5",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT: ",
+        "USER: "
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": [],
+    "tokenizer": "LlamaTokenizer",
+    "model_loader": "LlamaForCausalLM"
+  },
+  {
+    "name": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "sys_prompt": {
+      "sys_prompt": "<|SYSTEM|>\nYou are a helpful assistant.\n",
+      "roles": [
+        "<|ASSISTANT|> ",
+        "<|USER|> "
+      ]
+    },
+    "limit": 2048,
+    "stop_ids": [],
+    "tokenizer": "LlamaTokenizer",
+    "model_loader": "LlamaForCausalLM"
+  },
+  {
+    "name": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "assistant",
+        "user"
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": []
+  },
+  {
+    "name": "meta-llama/Llama-3.2-3B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "assistant",
+        "user"
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": []
+  },
+  {
+    "name": "meta-llama/Llama-3.2-1B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "assistant",
+        "user"
+      ]
+    },
+    "limit": 2048,
+    "stop_ids": []
+  },
+  {
+    "name": "mistralai/Mistral-7B-Instruct-v0.3",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "assistant",
+        "user"
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": []
+  },
+  {
+    "name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": [],
+    "eot": 151649
+  },
+  {
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 8192,
+    "stop_ids": []
+  },
+  {
+    "name": "HuggingFaceH4/zephyr-7b-beta",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": []
+  },
+  {
+    "name": "openai/gpt-oss-20b",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 4096,
+    "stop_ids": []
+  },
+  {
+    "name": "Qwen/Qwen3-8B",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": [],
+    "eot": 151668
+  },
+  {
+    "name": "Qwen/Qwen3-4B-Instruct-2507",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "ByteDance-Seed/Seed-Coder-8B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "ibm-granite/granite-4.1-8b",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "microsoft/Phi-4-mini-instruct",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "zai-org/GLM-4-9B-0414",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  },
+  {
+    "name": "ibm-granite/granite-4.0-h-tiny",
+    "sys_prompt": {
+      "sys_prompt": "You are a helpful assistant.",
+      "roles": [
+        "ASSISTANT:",
+        "USER:"
+      ]
+    },
+    "limit": 1024,
+    "stop_ids": []
+  }
+]

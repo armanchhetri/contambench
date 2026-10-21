@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "contambench"
-version = "0.1.1"
+version = "0.2.0"
 description = "Stressor suites, labeled contaminated workloads, and reference measurements for testing LLM serving"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "src/contambench/gen/loopllm/LICENSE"]
 authors = [
     { name = "Arman Chhetri", email = "ac7240@rit.edu" },
     { name = "Yinxi Liu", email = "yxlics@rit.edu" },
@@ -35,6 +35,18 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=8", "jsonschema>=4"]
+# Stressor generation (`contam-bench generate`): only what the LoopLLM and Engorgio paths import.
+gen = [
+    "torch>=2.8",
+    "transformers>=4.57,<5",
+    "accelerate>=1.10",
+    "bitsandbytes>=0.48.1; sys_platform == 'linux' or sys_platform == 'win32'",
+    "pydantic>=2.7",
+    "datasets>=4.2",
+    "antropy>=0.1.6",
+    "tqdm>=4.66",
+    "sentencepiece>=0.2",
+]
 
 [project.scripts]
 contam-bench = "contambench.cli:main"
@@ -48,7 +60,7 @@ Source = "https://github.com/armanchhetri/contambench"
 packages = ["src/contambench"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/contambench", "tests", "README.md", "LICENSE", "pyproject.toml"]
+include = ["src/contambench", "tests", "scripts", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

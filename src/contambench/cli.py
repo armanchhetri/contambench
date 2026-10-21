@@ -159,6 +159,35 @@ def cmd_import_guidellm(args) -> int:
     return 0
 
 
+def cmd_generate(args) -> int:
+    import importlib.util
+
+    from contambench import gen
+
+    if args.list_models:
+        from contambench.gen.modelsinfo import known_models
+
+        print("\n".join(known_models()))
+        return 0
+    if not args.model or not args.out:
+        print("generate: --model and --out are required", file=sys.stderr)
+        return 2
+    if args.method == "engorgio" and importlib.util.find_spec("contambench.gen.engorgio") is None:
+        print("generate: the Engorgio port is not included in this build of contambench "
+              "(see THIRD_PARTY_NOTICES.md); use --method loopllm", file=sys.stderr)
+        return 2
+    names = gen.missing(quantize=args.quantize is not None)
+    if names:
+        print(gen.hint(names), file=sys.stderr)
+        return 3
+    from contambench.gen.run import generate
+
+    generate(args.method, args.model, args.out, prompts=args.prompts, n_prompts=args.n_prompts, steps=args.steps,
+             seed=args.seed, quantize=args.quantize, max_length=args.max_length, gpu_threshold=args.gpu_threshold,
+             trigger_len=args.trigger_len, cpuoffload=args.cpuoffload, model_info=args.model_info)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="contam-bench", description=__doc__)
     p.add_argument("--version", action="version", version=f"contambench {__version__}")
@@ -223,6 +252,33 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--arrival-rate", type=float, help="rate label (default: GuideLLM's aggregate rate)")
     g.add_argument("--trial", type=int, default=0)
     g.add_argument("--model")
+
+    gn = sub.add_parser(
+        "generate", help="generate a stressor suite (D1 pairs) for a model; needs a GPU and contambench[gen]",
+        description="Optimize stressor suffixes against a Hugging Face model you are authorized to test and write "
+                    "a D1 pairs file with Stage-A records. Needs a CUDA GPU and `pip install 'contambench[gen]'`. "
+                    "Stage B still has to be measured on the target deployment with calibrate/run/score.")
+    gn.add_argument("--method", choices=["loopllm", "engorgio"], default="loopllm", help="default: loopllm")
+    gn.add_argument("--model", help="Hugging Face model id, e.g. meta-llama/Llama-3.2-3B-Instruct")
+    gn.add_argument("--out", help="output directory (writes pairs.json and work/) or a .json pairs file")
+    gn.add_argument("--prompts", default="alpaca",
+                    help="benign prompt source: alpaca, sharegpt, or a .json file (list of strings, list of "
+                         "{prompt}, or {prompts: [...]}); default alpaca")
+    gn.add_argument("--n-prompts", type=int, default=195, help="number of benign prompts (pairs); default 195")
+    gn.add_argument("--steps", type=int,
+                    help="optimization steps: per prompt for loopllm (default 100), iterations for engorgio "
+                         "(default 3000)")
+    gn.add_argument("--seed", type=int, default=23)
+    gn.add_argument("--quantize", type=int, choices=[4, 8], help="load the model with bitsandbytes 4-bit or 8-bit")
+    gn.add_argument("--max-length", type=int,
+                    help="generation cap in tokens (prompt + output) used for optimization and Stage A; "
+                         "default: the model's limit in modelsinfo.json, else 4096")
+    gn.add_argument("--gpu-threshold", type=int, default=85,
+                    help="engorgio: GPU memory percent above which activations are offloaded (with --cpuoffload)")
+    gn.add_argument("--trigger-len", type=int, default=32, help="engorgio: trigger length in tokens (default 32)")
+    gn.add_argument("--cpuoffload", action="store_true", help="engorgio: allow offloading activations to CPU")
+    gn.add_argument("--model-info", help="JSON file with modelsinfo entries (name, limit, stop_ids, eot, ...)")
+    gn.add_argument("--list-models", action="store_true", help="list the models with shipped metadata and exit")
     return p
 
 
@@ -253,7 +309,8 @@ def main(argv: list[str] | None = None) -> int:
         return passthrough[argv[i]](args, extra)
     args = build_parser().parse_args(argv)
     return {"data": cmd_data, "export": cmd_export, "calibrate": cmd_calibrate, "score": cmd_score,
-            "report": cmd_report, "examples": cmd_examples, "import-guidellm": cmd_import_guidellm}[args.cmd](args)
+            "report": cmd_report, "examples": cmd_examples, "import-guidellm": cmd_import_guidellm,
+            "generate": cmd_generate}[args.cmd](args)
 
 
 if __name__ == "__main__":
