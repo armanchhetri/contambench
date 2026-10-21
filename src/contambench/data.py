@@ -31,7 +31,6 @@ SUITES = {
     "qwen2.5-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
     "llama-3.1-8b-instruct": "meta-llama/Meta-Llama-3.1-8B-Instruct",
     "mistral-7b-instruct-v0.3": "mistralai/Mistral-7B-Instruct-v0.3",
-    "qwen2.5-math-7b": "Qwen/Qwen2.5-Math-7B",
 }
 CAMPAIGNS = {
     "aws_llama3b": "llama-3.2-3b-instruct",

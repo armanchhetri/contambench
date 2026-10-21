@@ -81,7 +81,7 @@ def test_heavy_modules_are_guarded():
     r = _run_blocked("""
         from contambench.gen import MissingExtraError
         for mod in ("contambench.gen.models", "contambench.gen.run", "contambench.gen.loopllm.attack",
-                    "contambench.gen.loopllm.utils"):
+                    "contambench.gen.loopllm.utils", "contambench.gen.engorgio.attack"):
             try:
                 __import__(mod)
             except MissingExtraError as e:
@@ -150,16 +150,3 @@ def test_modelsinfo(tmp_path):
     assert (own.limit, own.stop_ids, own.eot) == (2048, [7], 9)
     assert all(not modelsinfo.get_modelinfo(m).is_vlm for m in modelsinfo.known_models())
 
-
-def test_engorgio_absent_is_reported(monkeypatch, capsys, tmp_path):
-    real = gen._find_spec
-
-    def fake(name):
-        if name.startswith("contambench.gen.engorgio"):
-            raise ModuleNotFoundError(name)
-        return real(name)
-
-    monkeypatch.setattr(gen, "_find_spec", fake)
-    assert not gen.has_engorgio()
-    assert cli.main(["generate", "--method", "engorgio", "--model", "m", "--out", str(tmp_path / "o")]) == 2
-    assert "THIRD_PARTY_NOTICES.md" in capsys.readouterr().err

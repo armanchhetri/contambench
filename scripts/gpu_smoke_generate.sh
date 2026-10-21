@@ -1,46 +1,75 @@
 #!/usr/bin/env bash
-# GPU smoke test for `contam-bench generate`: a small LoopLLM job, a small Engorgio job
-# (if this build includes the Engorgio port), then `contam-bench export --pairs` on each.
+# GPU smoke test for `contam-bench generate`: a small generation job per method, then
+# `contam-bench export --pairs` on each result.
 #
-# Needs: a CUDA GPU, `pip install 'contambench[gen]'` in the active environment, and
-# access to the model on Hugging Face (Llama 3.2 is gated: `huggingface-cli login` or
-# set HF_TOKEN). Run only against models you are authorized to test.
+# Needs a CUDA GPU, `pip install 'contambench[gen]'`, and access to the model on Hugging
+# Face (Llama 3.2 is gated: run `huggingface-cli login` first). Run it only against
+# models you are authorized to test.
 #
-#   bash scripts/gpu_smoke_generate.sh [OUT_DIR]          # default OUT_DIR=smoke_gen
-#   MODEL=Qwen/Qwen2.5-7B-Instruct bash scripts/gpu_smoke_generate.sh
+#   bash scripts/gpu_smoke_generate.sh --model meta-llama/Llama-3.2-3B-Instruct --method both --out smoke_gen
+#
+# Options (defaults in brackets):
+#   --model ID               Hugging Face model id             [meta-llama/Llama-3.2-3B-Instruct]
+#   --method M               loopllm | engorgio | both         [both]
+#   --out DIR                output directory                  [smoke_gen]
+#   --n-prompts N            benign prompts (pairs)            [2]
+#   --steps N                LoopLLM steps per prompt          [5]
+#   --engorgio-steps N       Engorgio iterations               [200]
+#   --max-length N           LoopLLM generation cap, tokens    [512]
+#   --engorgio-max-length N  Engorgio generation cap, tokens   [256]
+#   --trigger-len N          Engorgio trigger length           [16]
+#   --prompts SRC            alpaca | sharegpt | FILE.json     [alpaca]
+#   --c C                    contamination ratio for export    [0.10]
 set -euo pipefail
 
-OUT=${1:-smoke_gen}
-MODEL=${MODEL:-meta-llama/Llama-3.2-3B-Instruct}
-N_PROMPTS=${N_PROMPTS:-2}
-CB=${CONTAM_BENCH:-contam-bench}
+MODEL=meta-llama/Llama-3.2-3B-Instruct
+METHOD=both
+OUT=smoke_gen
+N_PROMPTS=2
+STEPS=5
+ENG_STEPS=200
+MAX_LEN=512
+ENG_MAX_LEN=256
+TRIGGER_LEN=16
+PROMPTS=alpaca
+C=0.10
+
+usage() { sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//'; }
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --model) MODEL=$2; shift 2 ;;
+        --method) METHOD=$2; shift 2 ;;
+        --out) OUT=$2; shift 2 ;;
+        --n-prompts) N_PROMPTS=$2; shift 2 ;;
+        --steps) STEPS=$2; shift 2 ;;
+        --engorgio-steps) ENG_STEPS=$2; shift 2 ;;
+        --max-length) MAX_LEN=$2; shift 2 ;;
+        --engorgio-max-length) ENG_MAX_LEN=$2; shift 2 ;;
+        --trigger-len) TRIGGER_LEN=$2; shift 2 ;;
+        --prompts) PROMPTS=$2; shift 2 ;;
+        --c) C=$2; shift 2 ;;
+        -h|--help) usage; exit 0 ;;
+        *) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
+    esac
+done
+case "$METHOD" in loopllm|engorgio|both) ;; *) echo "--method must be loopllm, engorgio, or both" >&2; exit 2 ;; esac
+
 mkdir -p "$OUT"
+echo "== $(contam-bench --version), model $MODEL, method $METHOD, output in $OUT"
 
-echo "== contambench $($CB --version) on $(hostname), model $MODEL, output in $OUT"
-nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || true
-python -c "import torch; assert torch.cuda.is_available(), 'no CUDA device'; print('torch', torch.__version__, torch.cuda.get_device_name(0))"
-
-echo "== LoopLLM: $N_PROMPTS prompts, 5 steps each, cap 512 tokens"
-$CB generate --method loopllm --model "$MODEL" --out "$OUT/loopllm" \
-    --n-prompts "$N_PROMPTS" --steps 5 --max-length 512 --seed 23 2>&1 | tee "$OUT/loopllm.log"
-$CB export --pairs "$OUT/loopllm/pairs.json" --c 0.10 --k "$N_PROMPTS" --out "$OUT/loopllm_c0p10.csv"
-
-if python -c "import sys, contambench.gen as g; sys.exit(not g.has_engorgio())"; then
-    echo "== Engorgio: 200 iterations, trigger 16 tokens, cap 256 tokens, $N_PROMPTS prompts"
-    $CB generate --method engorgio --model "$MODEL" --out "$OUT/engorgio" \
-        --n-prompts "$N_PROMPTS" --steps 200 --trigger-len 16 --max-length 256 --seed 23 2>&1 | tee "$OUT/engorgio.log"
-    $CB export --pairs "$OUT/engorgio/pairs.json" --c 0.10 --k "$N_PROMPTS" --out "$OUT/engorgio_c0p10.csv"
-else
-    echo "== Engorgio port not in this build; skipped (see THIRD_PARTY_NOTICES.md)"
+if [ "$METHOD" = loopllm ] || [ "$METHOD" = both ]; then
+    echo "== LoopLLM: $N_PROMPTS prompts, $STEPS steps each, cap $MAX_LEN tokens"
+    contam-bench generate --method loopllm --model "$MODEL" --out "$OUT/loopllm" --prompts "$PROMPTS" \
+        --n-prompts "$N_PROMPTS" --steps "$STEPS" --max-length "$MAX_LEN" --seed 23 2>&1 | tee "$OUT/loopllm.log"
+    contam-bench export --pairs "$OUT/loopllm/pairs.json" --c "$C" --k "$N_PROMPTS" --out "$OUT/loopllm_workload.csv"
 fi
 
-python - "$OUT" <<'PY'
-import json, sys, pathlib
-for f in sorted(pathlib.Path(sys.argv[1]).glob("*/pairs.json")):
-    d = json.loads(f.read_text())
-    p = d["provenance"]
-    print(f"{f}: {d['pairs']} pairs, mean success_rate={d['average_asr']}, mean avg_len={d['average_len']}, "
-          f"generator={p['generator']}, suffix_tokens={p['suffix_tokens']}, seed={p['seed']}, "
-          f"contambench={p['versions']['contambench']}")
-PY
-echo "== done; workloads: $(ls "$OUT"/*.csv | tr '\n' ' ')"
+if [ "$METHOD" = engorgio ] || [ "$METHOD" = both ]; then
+    echo "== Engorgio: $ENG_STEPS iterations, trigger $TRIGGER_LEN tokens, cap $ENG_MAX_LEN tokens, $N_PROMPTS prompts"
+    contam-bench generate --method engorgio --model "$MODEL" --out "$OUT/engorgio" --prompts "$PROMPTS" \
+        --n-prompts "$N_PROMPTS" --steps "$ENG_STEPS" --trigger-len "$TRIGGER_LEN" --max-length "$ENG_MAX_LEN" \
+        --seed 23 2>&1 | tee "$OUT/engorgio.log"
+    contam-bench export --pairs "$OUT/engorgio/pairs.json" --c "$C" --k "$N_PROMPTS" --out "$OUT/engorgio_workload.csv"
+fi
+
+echo "== done: pairs in $OUT/*/pairs.json, workloads in $OUT/*_workload.csv"

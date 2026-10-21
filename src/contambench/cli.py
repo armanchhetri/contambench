@@ -170,10 +170,6 @@ def cmd_generate(args) -> int:
     if not args.model or not args.out:
         print("generate: --model and --out are required", file=sys.stderr)
         return 2
-    if args.method == "engorgio" and not gen.has_engorgio():
-        print("generate: the Engorgio port is not included in this build of contambench "
-              "(see THIRD_PARTY_NOTICES.md); use --method loopllm", file=sys.stderr)
-        return 2
     names = gen.missing(quantize=args.quantize is not None)
     if names:
         print(gen.hint(names), file=sys.stderr)

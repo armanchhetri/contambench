@@ -37,14 +37,6 @@ def missing(quantize: bool = False) -> list[str]:
     return out
 
 
-def has_engorgio() -> bool:
-    """Whether this build includes the Engorgio port (see THIRD_PARTY_NOTICES.md)."""
-    try:
-        return _find_spec("contambench.gen.engorgio.attack") is not None
-    except (ImportError, ValueError):
-        return False
-
-
 def hint(names: list[str]) -> str:
     return (f"stressor generation needs the optional 'gen' extra (missing: {', '.join(names)}).\n"
             f"Install it with:  {INSTALL_HINT}\n"

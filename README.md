@@ -67,7 +67,7 @@ contam-bench score contambench-results/raw/<run_id>
 ```
 
 Suites: `llama-3.2-3b-instruct`, `qwen2.5-7b-instruct`, `llama-3.1-8b-instruct`,
-`mistral-7b-instruct-v0.3`, `qwen2.5-math-7b`. `export --k` sets how many top prompts by
+`mistral-7b-instruct-v0.3`. `export --k` sets how many top prompts by
 Stage-A success rate the stressors are drawn from (default 50); `--benign FILE` uses your
 own benign pool with the columns `prompt_id, prompt, success_rate`.
 
@@ -173,8 +173,7 @@ contam-bench generate --list-models     # models with shipped metadata (output l
 # LoopLLM, as used for the released suites: 195 Alpaca prompts, 30-token suffix, 100 steps per prompt
 contam-bench generate --model meta-llama/Llama-3.2-3B-Instruct --out suites/llama3b
 
-# Engorgio (Dong et al., ICLR 2025), one trigger search, triggers appended to the benign prompts.
-# Not in public builds yet: its upstream code has no license (see THIRD_PARTY_NOTICES.md).
+# Engorgio (Dong et al., ICLR 2025), one trigger search, triggers appended to the benign prompts
 contam-bench generate --method engorgio --model meta-llama/Llama-3.2-3B-Instruct --out suites/llama3b-engorgio
 
 contam-bench export --pairs suites/llama3b/pairs.json --c 0.10 --out workload.csv
@@ -207,8 +206,9 @@ reach the cap on your deployment (Stage B) depends on its serving stack, decodin
 settings, and output limit. Measure it with `calibrate`, `run`, and `score`
 (section 4) before relying on the suite, and report the Stage-B line with any result.
 
-A short GPU smoke test, as a shell script and as a SLURM batch file, is in `scripts/`
-(`gpu_smoke_generate.sh`, `gpu_smoke_generate.sbatch`).
+`scripts/gpu_smoke_generate.sh` runs a small generation job and exports a workload
+from it, as a quick check on a GPU machine:
+`bash scripts/gpu_smoke_generate.sh --model meta-llama/Llama-3.2-3B-Instruct --method both --out smoke_gen`.
 
 ## The oracle
 
@@ -236,8 +236,8 @@ The released stressors were generated with
 [LoopLLM](https://github.com/neuron-insight-lab/LoopLLM) (Li et al., *LoopLLM:
 Transferable Energy-Latency Attacks in LLMs via Repetitive Generation*, AAAI 2026,
 [arXiv:2511.07876](https://arxiv.org/abs/2511.07876)), which `contambench.gen`
-vendors under the Apache License 2.0 with its license file. The `engorgio` method
-follows [Engorgio](https://github.com/jianshuod/Engorgio-prompt) (Dong et al., *An
+vendors under the Apache License 2.0 with its license file. The `engorgio` method is
+adapted from [Engorgio](https://github.com/jianshuod/Engorgio-prompt) (Dong et al., *An
 Engorgio Prompt Makes Large Language Model Babble on*, ICLR 2025,
 [arXiv:2412.19394](https://arxiv.org/abs/2412.19394)). See `THIRD_PARTY_NOTICES.md`
 for licenses and changes.

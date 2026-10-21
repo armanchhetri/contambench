@@ -27,17 +27,14 @@ contains code adapted from the projects below.
 ## Engorgio
 
 - Code: `src/contambench/gen/engorgio/` (attack loop, `ica_utils/loss.py`,
-  `ica_utils/prepare.py`, `ica_utils/ctl.py`), adapted from
-  <https://github.com/jianshuod/Engorgio-prompt> (commit `5fb50dd`, August 2025).
-- License: the upstream repository has **no license file** and its README states no
-  license terms (checked 2026-10-21). Without a license, redistribution rights are not
-  granted, so this port is not part of public contambench builds until the authors grant
-  permission or add a license. Builds without it report this when
-  `--method engorgio` is requested.
+  `ica_utils/prepare.py`, `ica_utils/ctl.py`). The Engorgio implementation is adapted,
+  with credit, from the authors' repository <https://github.com/jianshuod/Engorgio-prompt>
+  (commit `5fb50dd`, August 2025), and substantially modified.
 - Changes: soft-prompt optimization driven through contambench's `Model` wrapper and the
   model's chat template; multiple end-of-sequence ids; an optional second loss version;
   CPU offloading of activations above a GPU-memory threshold; the trigger tokens kept
-  with each candidate so pairs can be built.
+  with each candidate so D1 pairs can be built; a clear error for tokenizers that do not
+  round-trip the template placeholder token.
 - Paper: Jianshuo Dong, Ziyuan Zhang, Qingjie Zhang, Han Qiu, Tianwei Zhang, Hao Wang,
   Hewu Li, Qi Li, Chao Zhang, and Ke Xu. *An Engorgio Prompt Makes Large Language Model
   Babble on.* ICLR 2025. <https://openreview.net/forum?id=m4eXBo0VNc>,

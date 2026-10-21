@@ -1,6 +1,6 @@
 # Engorgio (Dong et al., ICLR 2025, "An Engorgio Prompt Makes Large Language Model Babble on").
-# Adapted by the ContamBench authors from https://github.com/jianshuod/Engorgio-prompt
-# (commit 5fb50dd). The upstream repository carries no license file; see THIRD_PARTY_NOTICES.md.
+# Adapted, with credit, from the authors' repository https://github.com/jianshuod/Engorgio-prompt
+# (commit 5fb50dd) and modified by the ContamBench authors; see THIRD_PARTY_NOTICES.md.
 import numpy as np
 import torch
 import torch.nn.functional as F
