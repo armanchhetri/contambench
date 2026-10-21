@@ -152,10 +152,14 @@ def test_modelsinfo(tmp_path):
 
 
 def test_engorgio_absent_is_reported(monkeypatch, capsys, tmp_path):
-    import importlib.util
+    real = gen._find_spec
 
-    real = importlib.util.find_spec
-    monkeypatch.setattr(importlib.util, "find_spec",
-                        lambda name, *a: None if name.startswith("contambench.gen.engorgio") else real(name, *a))
+    def fake(name):
+        if name.startswith("contambench.gen.engorgio"):
+            raise ModuleNotFoundError(name)
+        return real(name)
+
+    monkeypatch.setattr(gen, "_find_spec", fake)
+    assert not gen.has_engorgio()
     assert cli.main(["generate", "--method", "engorgio", "--model", "m", "--out", str(tmp_path / "o")]) == 2
     assert "THIRD_PARTY_NOTICES.md" in capsys.readouterr().err
