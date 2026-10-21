@@ -25,7 +25,7 @@ $CB generate --method loopllm --model "$MODEL" --out "$OUT/loopllm" \
     --n-prompts "$N_PROMPTS" --steps 5 --max-length 512 --seed 23 2>&1 | tee "$OUT/loopllm.log"
 $CB export --pairs "$OUT/loopllm/pairs.json" --c 0.10 --k "$N_PROMPTS" --out "$OUT/loopllm_c0p10.csv"
 
-if python -c "import importlib.util, sys; sys.exit(importlib.util.find_spec('contambench.gen.engorgio') is None)"; then
+if python -c "import importlib.util, sys; sys.exit(importlib.util.find_spec('contambench.gen.engorgio.attack') is None)"; then
     echo "== Engorgio: 200 iterations, trigger 16 tokens, cap 256 tokens, $N_PROMPTS prompts"
     $CB generate --method engorgio --model "$MODEL" --out "$OUT/engorgio" \
         --n-prompts "$N_PROMPTS" --steps 200 --trigger-len 16 --max-length 256 --seed 23 2>&1 | tee "$OUT/engorgio.log"

@@ -149,3 +149,13 @@ def test_modelsinfo(tmp_path):
     own = modelsinfo.get_modelinfo("someone/unlisted-model", f)
     assert (own.limit, own.stop_ids, own.eot) == (2048, [7], 9)
     assert all(not modelsinfo.get_modelinfo(m).is_vlm for m in modelsinfo.known_models())
+
+
+def test_engorgio_absent_is_reported(monkeypatch, capsys, tmp_path):
+    import importlib.util
+
+    real = importlib.util.find_spec
+    monkeypatch.setattr(importlib.util, "find_spec",
+                        lambda name, *a: None if name.startswith("contambench.gen.engorgio") else real(name, *a))
+    assert cli.main(["generate", "--method", "engorgio", "--model", "m", "--out", str(tmp_path / "o")]) == 2
+    assert "THIRD_PARTY_NOTICES.md" in capsys.readouterr().err
