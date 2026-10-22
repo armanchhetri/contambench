@@ -1,0 +1,273 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+--- Loading Model: meta-llama/Llama-3.2-3B-Instruct ---
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:17<00:17, 17.11s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:22<00:00,  9.93s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:22<00:00, 11.01s/it]
+
+======================================================================
+Model: meta-llama/Llama-3.2-3B-Instruct
+======================================================================
+  eos=128009 bos=128000 pad=128009 vocab=128256 total_vocab=128256
+  generation_config: max_length=20 eos=[128001, 128008, 128009] pad=None do_sample=True temperature=0.6
+  chat_template: True  stop_ids=[]  response_limit=256
+  type=LlamaForCausalLM quantized=False device=cuda:0
+GPU Memory before attack: 6127.83MB
+Starting engorgio attack with gpu_threshold = 85 and 
+cpuoffload=False seed=123 log_interval=10 warmup_lr=0.1 esc_loss_warmup_iters=20 warmup_alpha=1 warmup_filter=True warmup_initial_coeff=5 converge_count=50 lr=0.05 num_iters=200 opt_alpha=1 alpha=0.5 loss_opt=[1, 2] esc_loss_version=0 sm_loss_version=0 trigger_esc_eos=False alternate=False loss_version=1 trigger_token_length=16 max_length=256 initial_coeff=0.001 normal_init=False bs=8 sample_time=80 temperature=0.7 top_k=0 top_p=1.0 eval_v2=False
+before:  68
+after 68
+<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 21 Oct 2026
+
+You are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+ sonuç Evropy tasksunittest Anita Logger/gtest uygulan(dest确认据plash เช ^{} -->
+
+imentary<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+
+[Epoch 0](0), loss:46.042022705078125)
+[Epoch 1](0), loss:79.12493133544922)
+[Epoch 2](0), loss:42.8175163269043)
+[Epoch 3](0), loss:40.67245864868164)
+[Epoch 4](0), loss:37.79046630859375)
+[Epoch 5](0), loss:51.9332160949707)
+[Epoch 6](0), loss:43.81599426269531)
+[Epoch 7](0), loss:39.794029235839844)
+[Epoch 8](0), loss:28.28326416015625)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nMarginagainst cosmosีเอ.includesisaTemplatefilepath’intcline chết_DI｀ヽ теікиBitConverter<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 9](0), loss:30.830585479736328)
+[Epoch 10](0), loss:27.410938262939453)
+[Epoch 11](0), loss:34.20927810668945)
+[Epoch 12](0), loss:32.21350860595703)
+[Epoch 13](0), loss:28.163150787353516)
+[Epoch 14](0), loss:27.706466674804688)
+[Epoch 15](0), loss:30.646732330322266)
+[Epoch 16](0), loss:26.075233459472656)
+[Epoch 17](0), loss:25.90741539001465)
+[Epoch 18](0), loss:25.915340423583984)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nอพ ovarassociateาร рівня}/#{ теж(QWidget overlooking_right bathinguropean&oacute-Clauseände OUTER<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 19](0), loss:33.89562225341797)
+[Epoch 20](0), loss:47.08712387084961)
+[Epoch 21](0), loss:72.65935516357422)
+[Epoch 22](0), loss:49.84881591796875)
+[Epoch 23](0), loss:34.03372573852539)
+[Epoch 24](0), loss:32.494197845458984)
+[Epoch 25](0), loss:42.187599182128906)
+[Epoch 26](0), loss:43.10810852050781)
+[Epoch 27](0), loss:56.80433654785156)
+[Epoch 28](0), loss:41.959617614746094)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n_RSA�almartprü Picsellt registtriggerFitnessisnan Obama выпол висsignup_HDR(strlen<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 29](0), loss:39.03483581542969)
+[Epoch 30](0), loss:46.165382385253906)
+[Epoch 31](0), loss:43.68391799926758)
+[Epoch 32](0), loss:33.29447937011719)
+[Epoch 33](0), loss:28.226398468017578)
+[Epoch 34](0), loss:28.85973358154297)
+[Epoch 35](0), loss:43.34690856933594)
+[Epoch 36](0), loss:37.90752410888672)
+[Epoch 37](0), loss:38.829647064208984)
+[Epoch 38](0), loss:34.093780517578125)
+"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n THANesusfineization �'#۱۹۶ Mid.house لأنmeyiูม\tFOR grup linkingừng<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+[Epoch 39](0), loss:34.08329772949219)
+[Epoch 40](0), loss:40.67028045654297)
+[Epoch 41](0), loss:40.168060302734375)
+[Epoch 42](0), loss:36.83121871948242)
+[Epoch 43](0), loss:36.28778839111328)
+[Epoch 44](0), loss:34.314979553222656)
+[Epoch 45](0), loss:29.021451950073242)
+[Epoch 46](0), loss:35.16017150878906)
+[Epoch 47](0), loss:32.77784729003906)
+[Epoch 48](0), loss:37.917579650878906)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n Denise_goods(ConfigurationManagerCamчнаollar effective."""EntityManager libertarianrho nella Brassicy pageNumberšen<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 49](0), loss:23.86807632446289)
+[Epoch 50](0), loss:37.528114318847656)
+[Epoch 51](0), loss:27.656410217285156)
+[Epoch 52](0), loss:30.78860092163086)
+[Epoch 53](0), loss:30.97025489807129)
+[Epoch 54](0), loss:29.28158187866211)
+[Epoch 55](0), loss:34.217071533203125)
+[Epoch 56](0), loss:42.95030212402344)
+[Epoch 57](0), loss:31.27288055419922)
+[Epoch 58](0), loss:30.20611000061035)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n nausea最 посколькуourke)^_METADATA筆 moinsزيد uom("`>.</Createdampling듯setDisplay<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 59](0), loss:27.281517028808594)
+[Epoch 60](0), loss:30.332664489746094)
+[Epoch 61](0), loss:29.592605590820312)
+[Epoch 62](0), loss:32.723663330078125)
+[Epoch 63](0), loss:26.408519744873047)
+[Epoch 64](0), loss:26.526193618774414)
+[Epoch 65](0), loss:28.774551391601562)
+[Epoch 66](0), loss:30.345571517944336)
+[Epoch 67](0), loss:26.923358917236328)
+[Epoch 68](0), loss:24.512496948242188)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n-close fires.Axisти.two blanks برابر怪Sold providedaveledSignals 망.element Schedule働<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 69](0), loss:28.46805191040039)
+[Epoch 70](0), loss:23.769882202148438)
+[Epoch 71](0), loss:23.113319396972656)
+[Epoch 72](0), loss:24.240638732910156)
+[Epoch 73](0), loss:26.42442512512207)
+[Epoch 74](0), loss:27.850923538208008)
+[Epoch 75](0), loss:27.524599075317383)
+[Epoch 76](0), loss:26.278032302856445)
+[Epoch 77](0), loss:28.27178955078125)
+[Epoch 78](0), loss:27.773738861083984)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n overriding knees نقشهsomeAUD(subjectankind показ/- Communication喔\tnamespace=mysqlsportมหาวloha<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 79](0), loss:24.434131622314453)
+[Epoch 80](0), loss:32.16142654418945)
+[Epoch 81](0), loss:25.009838104248047)
+[Epoch 82](0), loss:26.567401885986328)
+[Epoch 83](0), loss:24.636287689208984)
+[Epoch 84](0), loss:31.395755767822266)
+[Epoch 85](0), loss:25.24472427368164)
+[Epoch 86](0), loss:27.357011795043945)
+[Epoch 87](0), loss:25.84030532836914)
+[Epoch 88](0), loss:24.491348266601562)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n ());\n\nyntaxExceptionpackages>V 공고/Images 산업 commencedротechましたittyURITY-numberging_OID<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 89](0), loss:23.088762283325195)
+[Epoch 90](0), loss:25.98672103881836)
+[Epoch 91](0), loss:26.151023864746094)
+[Epoch 92](0), loss:22.057178497314453)
+[Epoch 93](0), loss:22.56410026550293)
+[Epoch 94](0), loss:24.495407104492188)
+[Epoch 95](0), loss:22.72366714477539)
+[Epoch 96](0), loss:25.113428115844727)
+[Epoch 97](0), loss:22.117292404174805)
+[Epoch 98](0), loss:23.94352149963379)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nedge withdrawalCHAT.bed rule Interfaces содержpaginatoriler#acLiked فت(nilRh causimiento<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 99](0), loss:24.271936416625977)
+[Epoch 100](0), loss:24.525423049926758)
+Time Cost: 110.71585154533386
+[Epoch 101](0), loss:23.85696792602539)
+[Epoch 102](0), loss:23.973228454589844)
+[Epoch 103](0), loss:23.116762161254883)
+[Epoch 104](0), loss:21.84679412841797)
+[Epoch 105](0), loss:23.142440795898438)
+[Epoch 106](0), loss:22.829530715942383)
+[Epoch 107](0), loss:24.31624412536621)
+[Epoch 108](0), loss:25.828908920288086)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nếu리는 "";\nemade_prepare:@"% enrichedtering/yť |_|॰اسات Kup衝 vals<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 109](0), loss:25.654224395751953)
+[Epoch 110](0), loss:23.499797821044922)
+[Epoch 111](0), loss:21.125259399414062)
+[Epoch 112](0), loss:21.251745223999023)
+[Epoch 113](0), loss:25.01221466064453)
+[Epoch 114](0), loss:22.26972770690918)
+[Epoch 115](0), loss:24.563081741333008)
+[Epoch 116](0), loss:23.897001266479492)
+[Epoch 117](0), loss:24.693401336669922)
+[Epoch 118](0), loss:24.231948852539062)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\njà생(paymentCOMPLETE-develorganization_allowedánt orientation剣 received.FormStartPositionategorizedaccess!!} toReturn<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 119](0), loss:25.024513244628906)
+[Epoch 120](0), loss:24.080753326416016)
+[Epoch 121](0), loss:21.13336944580078)
+[Epoch 122](0), loss:23.30838394165039)
+[Epoch 123](0), loss:21.872629165649414)
+[Epoch 124](0), loss:22.60710906982422)
+[Epoch 125](0), loss:22.074604034423828)
+[Epoch 126](0), loss:22.882366180419922)
+[Epoch 127](0), loss:22.889856338500977)
+[Epoch 128](0), loss:21.717559814453125)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nistles<Book_flag-solvinghibitedoz proposing divinecksividad=""\n scientists SAYvang\tfoundabinet<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 129](0), loss:28.724212646484375)
+[Epoch 130](0), loss:22.237499237060547)
+[Epoch 131](0), loss:22.38818359375)
+[Epoch 132](0), loss:22.417362213134766)
+[Epoch 133](0), loss:24.084728240966797)
+[Epoch 134](0), loss:21.76721954345703)
+[Epoch 135](0), loss:21.757761001586914)
+[Epoch 136](0), loss:24.269683837890625)
+[Epoch 137](0), loss:21.41178321838379)
+[Epoch 138](0), loss:21.275686264038086)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n GNUNET 을 composливістьdbContext�_EVENT-bluepirreward гражAngular.Large ε�medřez<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 139](0), loss:24.404794692993164)
+[Epoch 140](0), loss:20.983928680419922)
+[Epoch 141](0), loss:21.721450805664062)
+[Epoch 142](0), loss:23.061079025268555)
+[Epoch 143](0), loss:20.90728187561035)
+[Epoch 144](0), loss:21.852054595947266)
+[Epoch 145](0), loss:24.594409942626953)
+[Epoch 146](0), loss:20.10358428955078)
+[Epoch 147](0), loss:23.139305114746094)
+[Epoch 148](0), loss:20.112485885620117)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n achievementsHandlingाइमATCHrogkea PropertyValue "<?华ówn корпус Stre потрібноetreHealth victim<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 149](0), loss:22.117416381835938)
+[Epoch 150](0), loss:21.461814880371094)
+[Epoch 151](0), loss:21.15005111694336)
+[Epoch 152](0), loss:20.956937789916992)
+[Epoch 153](0), loss:20.27601432800293)
+[Epoch 154](0), loss:20.55350112915039)
+[Epoch 155](0), loss:20.286149978637695)
+[Epoch 156](0), loss:20.416791915893555)
+[Epoch 157](0), loss:22.35664176940918)
+[Epoch 158](0), loss:19.990522384643555)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n Email(css=default Ś videoครอง mast.protocolologicaura.setHorizontalGroupUnary──389 cattlenis<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 159](0), loss:20.124042510986328)
+[Epoch 160](0), loss:19.92178726196289)
+[Epoch 161](0), loss:20.384565353393555)
+[Epoch 162](0), loss:18.821304321289062)
+[Epoch 163](0), loss:21.025358200073242)
+[Epoch 164](0), loss:20.74608612060547)
+[Epoch 165](0), loss:18.796913146972656)
+[Epoch 166](0), loss:20.39430809020996)
+[Epoch 167](0), loss:22.986614227294922)
+[Epoch 168](0), loss:20.706321716308594)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nへ(spvoucher раді Flowers heightened blindatetime.job"H Jelly coveted<Product_we گردید*out<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 169](0), loss:20.64250373840332)
+[Epoch 170](0), loss:20.037918090820312)
+[Epoch 171](0), loss:21.38431167602539)
+[Epoch 172](0), loss:19.17875099182129)
+[Epoch 173](0), loss:20.203258514404297)
+[Epoch 174](0), loss:19.526081085205078)
+[Epoch 175](0), loss:21.033720016479492)
+[Epoch 176](0), loss:20.05595588684082)
+[Epoch 177](0), loss:19.619169235229492)
+[Epoch 178](0), loss:18.672407150268555)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n necessitiesнулиern ksi shelter altercation_legacy savaşEv Gov mediation shakesसलVoltREADING passwords<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 179](0), loss:19.33707618713379)
+[Epoch 180](0), loss:20.244535446166992)
+[Epoch 181](0), loss:19.097335815429688)
+[Epoch 182](0), loss:20.058975219726562)
+[Epoch 183](0), loss:19.03125762939453)
+[Epoch 184](0), loss:18.717266082763672)
+[Epoch 185](0), loss:18.943180084228516)
+[Epoch 186](0), loss:18.981304168701172)
+[Epoch 187](0), loss:17.476825714111328)
+[Epoch 188](0), loss:18.84432601928711)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nffffff.Constant_protocol عکس�노출 seconds_singularosu role.codes shrimp disciplines cầu-design staying<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 189](0), loss:17.749935150146484)
+[Epoch 190](0), loss:16.872528076171875)
+[Epoch 191](0), loss:17.350780487060547)
+[Epoch 192](0), loss:17.481412887573242)
+[Epoch 193](0), loss:17.721410751342773)
+[Epoch 194](0), loss:16.985942840576172)
+[Epoch 195](0), loss:17.218379974365234)
+[Epoch 196](0), loss:18.374897003173828)
+[Epoch 197](0), loss:16.438800811767578)
+[Epoch 198](0), loss:17.70842742919922)
+'<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n NEVERvěl Mitar:frame WORK sürekli\tseqFormula\t\t.userService Recruicus wcurtlezero reforms<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+[Epoch 199](0), loss:16.559341430664062)
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nMarginagainst cosmosีเอ.includesisaTemplatefilepath’intcline chết_DI｀ヽ теікиBitConverter<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nอพ ovarassociateาร рівня}/#{ теж(QWidget overlooking_right bathinguropean&oacute-Clauseände OUTER<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n_RSA�almartprü Picsellt registtriggerFitnessisnan Obama выпол висsignup_HDR(strlen<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n THANesusfineization �'#۱۹۶ Mid.house لأنmeyiูม\tFOR grup linkingừng<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n Denise_goods(ConfigurationManagerCamчнаollar effective."""EntityManager libertarianrho nella Brassicy pageNumberšen<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n nausea最 посколькуourke)^_METADATA筆 moinsزيد uom("`>.</Createdampling듯setDisplay<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n-close fires.Axisти.two blanks برابر怪Sold providedaveledSignals 망.element Schedule働<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n overriding knees نقشهsomeAUD(subjectankind показ/- Communication喔\tnamespace=mysqlsportมหาวloha<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n ());\n\nyntaxExceptionpackages>V 공고/Images 산업 commencedротechましたittyURITY-numberging_OID<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nedge withdrawalCHAT.bed rule Interfaces содержpaginatoriler#acLiked فت(nilRh causimiento<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nếu리는 "";\nemade_prepare:@"% enrichedtering/yť |_|॰اسات Kup衝 vals<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\njà생(paymentCOMPLETE-develorganization_allowedánt orientation剣 received.FormStartPositionategorizedaccess!!} toReturn<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nistles<Book_flag-solvinghibitedoz proposing divinecksividad=""\n scientists SAYvang\tfoundabinet<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n GNUNET 을 composливістьdbContext�_EVENT-bluepirreward гражAngular.Large ε�medřez<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n achievementsHandlingाइमATCHrogkea PropertyValue "<?华ówn корпус Stre потрібноetreHealth victim<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n Email(css=default Ś videoครอง mast.protocolologicaura.setHorizontalGroupUnary──389 cattlenis<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nへ(spvoucher раді Flowers heightened blindatetime.job"H Jelly coveted<Product_we گردید*out<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n necessitiesнулиern ksi shelter altercation_legacy savaşEv Gov mediation shakesसलVoltREADING passwords<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nffffff.Constant_protocol عکس�노출 seconds_singularosu role.codes shrimp disciplines cầu-design staying<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+running multiple inference with temperature [0.7] and batchsize [16] on prompt '<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 21 Oct 2026\n\nYou are a helpful conversation AI assistant and answer to human in clear and concise way.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n NEVERvěl Mitar:frame WORK sürekli\tseqFormula\t\t.userService Recruicus wcurtlezero reforms<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n'
+GPU Memory after attack: 12271.92MB (difference 6144.08MB)
+[stage A 1/2] success_rate=0.062 avg_len=154.2
+[stage A 2/2] success_rate=1.000 avg_len=254.0
+wrote smoke_gen/engorgio/pairs.json: 2 pairs, mean Stage-A success rate 0.531
