@@ -161,6 +161,10 @@ and writes a D1 pairs file with Stage-A records. It needs a CUDA GPU (an A100 40
 fits a 3B to 8B model; use `--quantize 8` or `4` for larger ones) and the optional
 `gen` extra, which pulls in torch. The base install does not.
 
+Tested with torch 2.8.0 (CUDA 12.8 wheels) and transformers 4.57.6 on an NVIDIA A100 40 GB, so the
+extra pins torch below 2.9. Newer torch releases compile Triton kernels at run time and
+need a working C compiler on the GPU node.
+
 **Responsible use.** Generate and use stressors only against models and serving
 systems that you operate or are explicitly authorized to test. A suite is a load-test
 input: its purpose is to show whether a deployment keeps its latency objectives when
