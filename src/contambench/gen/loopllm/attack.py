@@ -53,6 +53,9 @@ class LoopLLMAttackParams(AttackParams):
     no_cuda: bool = False
     loss_config: str = DEFAULT_LOSS_CONFIG
     req_success_rate: float = 0.5
+    # Stage-A decoding: always sample at this temperature, whatever the checkpoint's
+    # generation_config ships (checkpoints without sampling settings would decode greedily).
+    temperature: float = 0.7
     # contambench: the research run re-evaluated the final prompts with 16 raw (no chat
     # template) generations each and kept the numbers only in memory. The D1 summary
     # comes from the res_*.json files, so `contam-bench generate` turns this off.
@@ -228,6 +231,8 @@ class LoopLLMAttacker(Attacker):
         device = model.device
         tokenizer = self.model.tokenizer
         model.generation_config.max_length = params.max_length
+        model.generation_config.do_sample = True
+        model.generation_config.temperature = params.temperature
 
         not_allowed_tokens = get_nonallowed_toks(tokenizer, model.device) # get_non_ascii_toks
 

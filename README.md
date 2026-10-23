@@ -193,6 +193,7 @@ contam-bench export --pairs suites/llama3b/pairs.json --c 0.10 --out workload.cs
 | `--seed` | random seed (default 23) |
 | `--quantize` | load with bitsandbytes `4` or `8` bit |
 | `--max-length` | generation cap in tokens for optimization and Stage A (default: the model's limit, else 4096) |
+| `--temperature` | Stage-A sampling temperature (default 0.7). Sampling is always on, also for checkpoints whose `generation_config.json` ships no sampling settings |
 | `--trigger-len`, `--gpu-threshold`, `--cpuoffload` | Engorgio trigger length (32), and activation offloading above a GPU-memory percentage |
 | `--model-info` | JSON with `name, limit, stop_ids, eot, ...` for a model that is not listed |
 

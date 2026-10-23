@@ -51,7 +51,8 @@ def _versions() -> dict:
     return v
 
 
-def _provenance(method, model, *, suffix_tokens, seed, steps, prompts, n_prompts, quantize, limit, extra) -> dict:
+def _provenance(method, model, *, suffix_tokens, seed, steps, prompts, n_prompts, quantize, limit, extra,
+                temperature) -> dict:
     return {
         "generator": method,
         "model": model.get_name(),
@@ -65,7 +66,7 @@ def _provenance(method, model, *, suffix_tokens, seed, steps, prompts, n_prompts
         "stage_a": {
             "samples_per_pair": STAGE_A_SAMPLES,
             "chat_template": "user message only, add_generation_prompt=True",
-            "decoding": "the model's generation_config (sampling as shipped by the checkpoint)",
+            "decoding": f"sampled, temperature {temperature} (do_sample forced on; other sampling settings from the checkpoint)",
             "generation_cap_tokens": limit,
             "success_rule": "prompt + output tokens >= generation cap - 5",
         },
@@ -75,7 +76,7 @@ def _provenance(method, model, *, suffix_tokens, seed, steps, prompts, n_prompts
     }
 
 
-def run_loopllm(model, work: Path, *, prompts, n_prompts, steps, seed, gpu_threshold) -> tuple[dict, dict]:
+def run_loopllm(model, work: Path, *, prompts, n_prompts, steps, seed, gpu_threshold, temperature) -> tuple[dict, dict]:
     from contambench.gen.loopllm.attack import LoopLLMAttacker, LoopLLMAttackParams
     from contambench.gen.loopllm.utils import DEFAULT_CYCLIC_SEGMENT_LEN, DEFAULT_LOSS_CONFIG
 
@@ -89,6 +90,7 @@ def run_loopllm(model, work: Path, *, prompts, n_prompts, steps, seed, gpu_thres
         steps=steps,
         seed=seed,
         evaluate_collected=False,
+        temperature=temperature,
     )
     attacker = LoopLLMAttacker(model)
     attacker.clear_attack()
@@ -150,7 +152,7 @@ def run_engorgio(model, work: Path, *, prompts, n_prompts, steps, seed, gpu_thre
 def generate(method: str, model_name: str, out: str | Path, *, prompts: str = "alpaca", n_prompts: int = 195,
              steps: int | None = None, seed: int = 23, quantize: int | None = None, max_length: int | None = None,
              gpu_threshold: int = 85, trigger_len: int = 32, cpuoffload: bool = False,
-             model_info: str | None = None) -> Path:
+             model_info: str | None = None, temperature: float = 0.7) -> Path:
     import torch
 
     if not torch.cuda.is_available():
@@ -162,10 +164,14 @@ def generate(method: str, model_name: str, out: str | Path, *, prompts: str = "a
     info = get_modelinfo(model_name, model_info, limit=max_length)
     model = get_model(info, quantize=quantize)
     model.print_details()
+    # Stage A always samples at `temperature`, also for checkpoints whose generation_config ships no
+    # sampling settings (they would otherwise decode greedily and give 16 identical samples).
+    model.hf_model.generation_config.do_sample = True
+    model.hf_model.generation_config.temperature = temperature
     if method == "loopllm":
         steps = steps or LOOPLLM_STEPS
         summary, extra = run_loopllm(model, work, prompts=prompts, n_prompts=n_prompts, steps=steps, seed=seed,
-                                     gpu_threshold=gpu_threshold)
+                                     gpu_threshold=gpu_threshold, temperature=temperature)
     elif method == "engorgio":
         steps = steps or ENGORGIO_STEPS
         summary, extra = run_engorgio(model, work, prompts=prompts, n_prompts=n_prompts, steps=steps, seed=seed,
@@ -174,7 +180,8 @@ def generate(method: str, model_name: str, out: str | Path, *, prompts: str = "a
         raise ValueError(f"unknown method {method!r}")
     suffix_tokens = extra.pop("suffix_tokens")
     prov = _provenance(method, model, suffix_tokens=suffix_tokens, seed=seed, steps=steps, prompts=prompts,
-                       n_prompts=n_prompts, quantize=quantize, limit=model.get_response_limit(), extra=extra)
+                       n_prompts=n_prompts, quantize=quantize, limit=model.get_response_limit(), extra=extra,
+                       temperature=temperature)
     write_pairs(pairs_file, summary, prov)
     n = len(summary["prompts"])
     asr = summary["average_asr"]

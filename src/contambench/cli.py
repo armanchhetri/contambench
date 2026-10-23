@@ -178,7 +178,8 @@ def cmd_generate(args) -> int:
 
     generate(args.method, args.model, args.out, prompts=args.prompts, n_prompts=args.n_prompts, steps=args.steps,
              seed=args.seed, quantize=args.quantize, max_length=args.max_length, gpu_threshold=args.gpu_threshold,
-             trigger_len=args.trigger_len, cpuoffload=args.cpuoffload, model_info=args.model_info)
+             trigger_len=args.trigger_len, cpuoffload=args.cpuoffload, model_info=args.model_info,
+             temperature=args.temperature)
     return 0
 
 
@@ -263,6 +264,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="optimization steps: per prompt for loopllm (default 100), iterations for engorgio "
                          "(default 3000)")
     gn.add_argument("--seed", type=int, default=23)
+    gn.add_argument("--temperature", type=float, default=0.7,
+                    help="Stage-A sampling temperature; sampling is always on (default 0.7)")
     gn.add_argument("--quantize", type=int, choices=[4, 8], help="load the model with bitsandbytes 4-bit or 8-bit")
     gn.add_argument("--max-length", type=int,
                     help="generation cap in tokens (prompt + output) used for optimization and Stage A; "
