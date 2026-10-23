@@ -106,7 +106,7 @@ def check_against_paper(sweeps: list[dict], base: Path | None = None) -> list[st
 
 
 def render(base: Path | None = None, check: bool = True) -> str:
-    lines = ["Table I. Released LoopLLM stressor suites (D1)",
+    lines = ["Table I. Stressor suites (D1): validated, then generated (Stage A only)",
              f"{'target':42} {'pairs':>5} {'L_max':>6} {'StageA':>7} {'StageB':>7} {'stress out':>10} {'benign out':>10}"]
     for r in table_suites(base):
         sb = "-" if r["stage_b"] is None else f"{r['stage_b']:.2f}"
@@ -114,11 +114,11 @@ def render(base: Path | None = None, check: bool = True) -> str:
         bo = "-" if r["benign_mean_out"] is None else f"{r['benign_mean_out']:.0f}"
         lines.append(f"{r['target']:42} {r['pairs']:>5} {r['L_max']:>6} {'---' if r['stage_a_top50'] is None else format(r['stage_a_top50'], '.2f'):>7} {sb:>7} {so:>10} {bo:>10}")
     sweeps = table_sweep(base)
-    lines += ["", "Table III. Contamination sweep at the high operating point (D3)"]
+    lines += ["", "Contamination sweep at the high operating point (D3), behind Table II"]
     for s in sweeps:
         lines += ["", s["deployment"], score.format_sweep(s)]
     g = table_guidellm(base)
-    lines += ["", "Table IV. Reuse of a D2 workload in GuideLLM (Llama-3.2-3B)"]
+    lines += ["", "Reuse of a D2 workload in GuideLLM (Llama-3.2-3B), Section IV U3"]
     for key, label in (("guidellm_benign", "GuideLLM, benign pool"), ("guidellm_c0p10", "GuideLLM, D2 at c=0.10"),
                        ("ours_c0", "harness, c=0"), ("ours_c0p10", "harness, c=0.10")):
         r = g[key]
