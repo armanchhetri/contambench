@@ -7,18 +7,17 @@ open-weight LLM serving stacks.
 A *stressor* is a request whose suffix drives decoding to the output cap. *Workload
 contamination* is the share `c` of stressors in a request stream; the term is unrelated
 to training-data contamination. A small fraction of stressors can push co-located
-benign requests past their latency objectives, and capacity tests that replay benign
-prompt pools do not exercise this case.
+benign requests past their latency objectives, and stress tests that replay ordinary
+prompts do not exercise this case.
 
 The package fetches and verifies the record, writes labeled workloads at a chosen `c`,
-runs YAML-configured campaigns against an endpoint you operate, and scores any run with
-the SLO oracle used for the published results. It does not introduce a new
-load-generation technique. Its workloads also run unchanged on existing load generators;
-section 5 shows this for [GuideLLM](https://github.com/vllm-project/guidellm).
+generates suites for new models, runs YAML-configured campaigns against an endpoint you
+operate, and scores any run with the SLO rule used for the published results. Its
+workloads also run unchanged in existing stress testers, as section 5 shows for [GuideLLM](https://github.com/vllm-project/guidellm).
 
 - Data record: Zenodo, [doi:10.5281/zenodo.23482023](https://doi.org/10.5281/zenodo.23482023)
 - Project page: [contambench.pages.dev](https://contambench.pages.dev)
-- Paper: *ContamBench: Stressor Suites and Contaminated Workload Traces for Testing LLM Serving*, ICSE 2027 Tool Demonstrations and Data Showcase (under review)
+- Paper: *ContamBench: Reusable Stress Workloads for Shared LLM Serving*, ICSE 2027 Tool Demonstrations and Data Showcase (under review)
 
 ## Install
 
@@ -233,7 +232,7 @@ pytest                                   # CPU tests; set CONTAMBENCH_DATA to al
 
 The GuideLLM comparison and the `import-guidellm` reader build on
 [GuideLLM](https://github.com/vllm-project/guidellm) by the vLLM project, used
-unmodified under the Apache License 2.0; contambench supplies labeled workloads that it
+under the Apache License 2.0; contambench supplies labeled workloads that it
 can run. The serving targets were run with
 [vLLM](https://github.com/vllm-project/vllm).
 
