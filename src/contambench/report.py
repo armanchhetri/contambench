@@ -19,7 +19,8 @@ HIGH_POINT = [
 
 # Suites whose Stage-A run used greedy decoding (no sampling in the model's default
 # generation config), so their 16 Stage-A samples are identical; no Stage-A rate is reported.
-GREEDY_STAGE_A = {"mistral-7b-instruct-v0.3"}
+GREEDY_STAGE_A = {"mistral-7b-instruct-v0.3", "phi-4-mini-instruct", "granite-4.1-8b",
+                  "seed-coder-8b-instruct", "glm-4-9b-0414"}
 
 
 def table_suites(base: Path | None = None, top_k: int = 50) -> list[dict]:

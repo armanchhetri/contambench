@@ -18,8 +18,8 @@ from pathlib import Path
 
 from contambench import __data_version__
 
-# Zenodo record of data version 0.1.0 (DOI 10.5281/zenodo.23482023).
-ZENODO_RECORD = os.environ.get("CONTAMBENCH_ZENODO_RECORD", "23482023")
+# Zenodo record of data version 0.2.0 (DOI 10.5281/zenodo.23605512); version 0.1.0 is record 23482023.
+ZENODO_RECORD = os.environ.get("CONTAMBENCH_ZENODO_RECORD", "23605512")
 ZENODO_FILES = "https://zenodo.org/records/{record}/files/{name}?download=1"
 
 PARTS = {"d1": "d1_stressors", "d2": "d2_workloads", "d3": "d3_execution"}
@@ -31,6 +31,15 @@ SUITES = {
     "qwen2.5-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
     "llama-3.1-8b-instruct": "meta-llama/Meta-Llama-3.1-8B-Instruct",
     "mistral-7b-instruct-v0.3": "mistralai/Mistral-7B-Instruct-v0.3",
+    # Generated suites: Stage A only (1024-token cap, 8-bit weights), not deployed.
+    "phi-4-mini-instruct": "microsoft/Phi-4-mini-instruct",
+    "granite-4.1-8b": "ibm-granite/granite-4.1-8b",
+    "seed-coder-8b-instruct": "ByteDance-Seed/Seed-Coder-8B-Instruct",
+    "qwen2.5-coder-7b-instruct": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "qwen3-4b-instruct-2507": "Qwen/Qwen3-4B-Instruct-2507",
+    "qwen3-8b": "Qwen/Qwen3-8B",
+    "glm-4-9b-0414": "zai-org/GLM-4-9B-0414",
+    "deepseek-r1-distill-qwen-7b": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
 }
 CAMPAIGNS = {
     "aws_llama3b": "llama-3.2-3b-instruct",

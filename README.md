@@ -15,7 +15,7 @@ generates suites for new models, runs YAML-configured campaigns against an endpo
 operate, and scores any run with the SLO rule used for the published results. Its
 workloads also run unchanged in existing stress testers, as section 5 shows for [GuideLLM](https://github.com/vllm-project/guidellm).
 
-- Data record: Zenodo, [doi:10.5281/zenodo.23482023](https://doi.org/10.5281/zenodo.23482023)
+- Data record: Zenodo, [doi:10.5281/zenodo.23605512](https://doi.org/10.5281/zenodo.23605512) (data version 0.2.0)
 - Project page: [contambench.pages.dev](https://contambench.pages.dev)
 - Paper: *ContamBench: Reusable Stress Workloads for Shared LLM Serving*, ICSE 2027 Tool Demonstrations and Data Showcase (under review)
 
@@ -29,7 +29,7 @@ pip install 'contambench[gen]'          # optional: stressor generation (torch, 
 ## 1. Get the data
 
 ```bash
-contam-bench data fetch                 # all three products, ~630 MB, into ~/.cache/contambench/0.1.0
+contam-bench data fetch                 # all three products, ~630 MB, into ~/.cache/contambench/0.2.0
 contam-bench data fetch --subset d1     # one product only: d1, d2, or d3
 contam-bench data fetch --from DIR      # copy from a local download of the record
 contam-bench data status                # what is present, and where
@@ -55,7 +55,7 @@ then compares the sweep with the published values. It runs on a CPU in a few sec
 contam-bench export --suite llama-3.2-3b-instruct --c 0.10 --out workload.csv
 
 # score any run in the D3 format: violation rate, benign-only rate, benign tail inflation, Stage B
-contam-bench score ~/.cache/contambench/0.1.0/d3_execution/runs/aws_qwen7b/rq2_sweep --arrival-rate 0.17
+contam-bench score ~/.cache/contambench/0.2.0/d3_execution/runs/aws_qwen7b/rq2_sweep --arrival-rate 0.17
 
 # copy the example campaign configurations into ./examples
 contam-bench examples
@@ -65,8 +65,10 @@ contam-bench run --config examples/simulate.yaml
 contam-bench score contambench-results/raw/<run_id>
 ```
 
-Suites: `llama-3.2-3b-instruct`, `qwen2.5-7b-instruct`, `llama-3.1-8b-instruct`,
-`mistral-7b-instruct-v0.3`. `export --k` sets how many top prompts by
+Validated suites: `llama-3.2-3b-instruct`, `qwen2.5-7b-instruct`, `llama-3.1-8b-instruct`,
+`mistral-7b-instruct-v0.3`. Generated suites with Stage A only (1024-token cap, 8-bit):
+`phi-4-mini-instruct`, `granite-4.1-8b`, `seed-coder-8b-instruct`, `qwen2.5-coder-7b-instruct`,
+`qwen3-4b-instruct-2507`, `qwen3-8b`, `glm-4-9b-0414`, `deepseek-r1-distill-qwen-7b`. `export --k` sets how many top prompts by
 Stage-A success rate the stressors are drawn from (default 50); `--benign FILE` uses your
 own benign pool with the columns `prompt_id, prompt, success_rate`.
 

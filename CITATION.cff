@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use contambench, please cite the ContamBench data record."
 title: "contambench"
-version: 0.1.1
+version: 0.2.0
 license: Apache-2.0
 type: software
 repository-code: "https://github.com/armanchhetri/contambench"
@@ -14,8 +14,8 @@ authors:
     affiliation: Rochester Institute of Technology
 preferred-citation:
   type: dataset
-  title: "ContamBench v0.1.0: Stressor Suites, Labeled Contaminated Workloads, and Reference Measurements for Testing LLM Serving"
-  doi: 10.5281/zenodo.23482023
+  title: "ContamBench v0.2.0: Reusable Stress Workloads for Shared LLM Serving"
+  doi: 10.5281/zenodo.23605512
   authors:
     - family-names: Chhetri
       given-names: Arman
