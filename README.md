@@ -15,7 +15,7 @@ generates suites for new models, runs YAML-configured campaigns against an endpo
 operate, and scores any run with the SLO rule used for the published results. Its
 workloads also run unchanged in existing stress testers, as section 5 shows for [GuideLLM](https://github.com/vllm-project/guidellm).
 
-- Data record: Zenodo, [doi:10.5281/zenodo.23605512](https://doi.org/10.5281/zenodo.23605512) (data version 0.2.0)
+- Data record: Zenodo, [zenodo.org/records/23605512](https://zenodo.org/records/23605512) (data version 0.2.0)
 - Project page: [contambench.pages.dev](https://contambench.pages.dev)
 - Paper: *ContamBench: Reusable Stress Workloads for Shared LLM Serving*, ICSE 2027 Tool Demonstrations and Data Showcase (under review)
 

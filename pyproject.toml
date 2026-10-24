@@ -53,7 +53,7 @@ contam-bench = "contambench.cli:main"
 
 [project.urls]
 Homepage = "https://contambench.pages.dev"
-Dataset = "https://doi.org/10.5281/zenodo.23605512"
+Dataset = "https://zenodo.org/records/23605512"
 Source = "https://github.com/armanchhetri/contambench"
 
 [tool.hatch.build.targets.wheel]
